@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<?php require('config.php'); ?>
+
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Home | project1</title>
+  <title>rxdt | project1</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
   <script src="js/bootstrap.js"></script>
 </head>
+
+
+
 
 <body>
   
@@ -21,27 +24,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Word Translator</a>
+      <a class="navbar-brand" href="#">All Translated Lists</a>
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
       <ul class="nav navbar-nav pull-right">
 
-        <li class=""><a href="<?php echo URL_ROOT; ?>/index.php">Input List</a></li>
-
-        <li class="active"><a href="#">Word List</a></li>
+        <li class="active"><a href="http://thecity.sfsu.edu/~rxdt/current.php#">Input Words Homepage</a></li>
       
       </ul>
     </div>
   </nav>
 
 <div class="container">
-
-  <div class="page-header">
-    <h1>Input A Word</h1>
-  </div>
-
 
   <div class="row">
     <div class="span8">
@@ -56,22 +52,39 @@
 
      -->
 
-      <?php 
-        // Grabbing the "word" from the Form Page
-        $new_word = $_POST['word'];
-        
+    <?php 
+
+        // Grabbing the "words list" from the Form Page
+        $list = $_POST['list'];
         // Create an array called words
-        $words = array();
-
-        // Add it to the array
-        $words .= $new_word;
+        $words = explode(" ", $list);
+        
+        foreach ($words as $value) 
+        {
+            $word = strtoupper($value);
+            echo "<br><br><b> $word </b> <br>";
+       
+            //Calls API and interprets a string of XML into an object
+            $xdef = simplexml_load_string(grab_xml_definition("$value", "spanish", "75da9658-d5ee-4b0d-8c00-1dfe4eaca8a4"));
+            //echo $xdef->entry[0]->def->dt;
+           
+            print_r($xdef);
+            print_r($xdef->def);
+        }
+    
+        
+        
+        
+        function grab_xml_definition ($word, $ref, $key)
+        {	
+        $uri = "http://www.dictionaryapi.com/api/v1/references/" . urlencode($ref) . "/xml/" . 
+        urlencode($word) . "?key=" . urlencode($key);
+  
+        return file_get_contents($uri);
+        };
 
         
-
-        foreach ($words as $word) {
-          
-            #code... this gives you an idea
-        }
+        
       ?>  
 
         
