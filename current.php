@@ -18,15 +18,13 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </button>
         
       <a class="navbar-brand" href="#">Current List to Translate</a>
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav pull-right">
+      <ul class="nav navbar-nav pull-center">
 
     <li class=""><a href="http://thecity.sfsu.edu/~rxdt/results.php#">All Translated Lists</a></li>
       
@@ -47,7 +45,7 @@
       <!-- Word Form -->
       <form action="results.php" method="post">
 
-        <textarea type="text" class="span6" name="list" id="list" rows="15" columns="50" value=></textarea>
+        <textarea type="text" class="span6" name="list" id="list" rows="15" columns="50"></textarea>
         <input type="submit" value="Translate List">
         
       </form><!-- End form -->
